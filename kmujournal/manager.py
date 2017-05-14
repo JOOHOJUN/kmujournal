@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from kmujournal.message import return_message, update_message, remove_keyboard
+from kmujournal.message import return_message, return_keyboard,update_message, remove_keyboard
 from kmujournal.crawlr_hpg import get_contents
 import re
 
 def first_process():
     code = 200
-    return return_message(), 200
+    return return_keyboard(), 200
 
 def af_clk_procees(data):
     code = 200
@@ -41,9 +41,7 @@ def af_clk_procees(data):
         return msg, 200
 
 def add_friend(data):
-    key = data.json['user_key']
     return 200
 
 def delete_friend(user_key):
-    key = data.json['user_key']
     return 200
