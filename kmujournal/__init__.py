@@ -9,5 +9,5 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-from kmujournal import view, model
+
 db.create_all()
