@@ -29,6 +29,6 @@ def update_message(msg, message):
     return msg
 
 def remove_keyboard(msg):
-    msg['keyboard'] = ''
+    msg['keyboard']['buttons'] = ''
     return msg
 

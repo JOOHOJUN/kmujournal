@@ -1,0 +1,7 @@
+*virtualenv files
+venv
+env/
+venv/
+
+*apache
+.wsgi

@@ -21,7 +21,7 @@ def af_clk_procees(data):
 
     elif content == u'최신 속보':
         msg = return_message()
-        return update_message(msg, u'text'), code
+        return update_message(msg, u'준비중입니다.'), code
 
     elif content == u'제보 하기':
         msg = return_message()
