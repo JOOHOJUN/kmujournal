@@ -1,7 +1,5 @@
 from kmujournal import app
 
-app.run()
-
 from flask import request, jsonify
 from kmujournal import manager
 
@@ -33,3 +31,7 @@ def yellow_friend_block(key):
 def yellow_exit(key):
     code = manager.delete_friend(key)
     return jsonify(code)
+
+
+if __name__ == '__main__':
+    app.run()

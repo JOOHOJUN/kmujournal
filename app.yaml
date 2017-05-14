@@ -1,4 +1,3 @@
-application: kmujournal
 runtime: python27
 threadsafe: true
 api_version: 1
