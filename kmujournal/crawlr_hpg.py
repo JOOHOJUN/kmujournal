@@ -52,7 +52,7 @@ def get_contents():
     dates = get_dates(items)
     contents =''
     YM_time=strftime("%Y.%m", localtime())
-    Day_time = int(strftime("%d", localtime()))-7
+    Day_time = 31-int(strftime("%d", localtime()))
     if Day_time < 10:
         Day_time='0'+str(Day_time)
 
@@ -63,9 +63,9 @@ def get_contents():
 
     for i in range(0,3):
         if in_Week_time < dates[i]:
-            contents += titles[i]+ '\n' +dates[i] + '\n' +   urls[i] + '\n\n'
+            contents += dates[i]+ '\n' +titles[i]+  '\n' +   urls[i] + '\n\n'
         if i == 0:
-            contents += u'\n==============\n'
-        contents += titles[i]+ '\n' +dates[i] + '\n' +   urls[i] + '\n\n'
+            contents += u'\n===한 달 전 기사===\n'
+        contents += dates[i]+ '\n' +titles[i]+  '\n' +   urls[i] + '\n\n'
         
     return contents
