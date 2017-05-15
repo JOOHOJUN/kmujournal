@@ -26,9 +26,12 @@ def af_clk_procees(data):
 
     elif content == u'제보 방법':
         msg = return_message()
-        udt_msg =update_message(msg, u"익명 보장합니다.\n"
-                                     u"키보드 1시 방향의 [1:1]를 누르세요\n"
-                                     u"on/off로 대화가 가능합니다.")
+        udt_msg =update_message(msg, u"키보드 1시 방향의 [1:1]를 누르세요\n"
+                                     u"on/off로 대화가 가능합니다.\n"
+                                     u"=================================\n"
+                                     u"교강사의 부적절한 발언을\n"
+                                     u"제보받고 있습니다.\n"
+                                     u"ex)성차별적, 성소수자 혐오발언 등")
         '''메시지에 그림 있다면'''
         return udt_msg, 200
     else:

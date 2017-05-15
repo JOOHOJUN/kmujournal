@@ -62,7 +62,7 @@ def get_contents():
     if dates == []:
         return contents
 
-    contents += u'==========한 달 이내==========\n'
+    contents += u'==========한 달 이내===========\n'
     for i in range(0, 3):
         if in_Week_time <= dates[i]:
             contents += dates[i] + '\n' + titles[i] + '\n' + urls[i] + '\n\n'
