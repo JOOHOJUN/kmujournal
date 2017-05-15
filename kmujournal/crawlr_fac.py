@@ -18,7 +18,7 @@ def get_url(get_items):
     url_list = []
     r = re.compile(u'단신&속보')
     for i in get_items:
-        if r.search(i.find('category').text) == None:
+        if r.search(i.find('category').text) != None :
             url_list.append(i.find('guid').text)
 
     return url_list
@@ -27,7 +27,7 @@ def get_titles(get_items):
     titles_list = []
     r = re.compile(u'단신&속보')
     for i in get_items:
-        if r.search(i.find('category').text) == None:
+        if r.search(i.find('category').text) != None:
             titles_list.append(i.find('title').text)
     return titles_list
 
@@ -37,13 +37,13 @@ def get_dates(get_items):
     dates_list = []
     r = re.compile(u'단신&속보')
     for i in get_items:
-        if r.search(i.find('category').text) == None:
+        if r.search(i.find('category').text) != None:
             imp = i.find('pubdate').text.split(' ')[1:4]
             dates_list.append(imp[2]+'-'+stands[imp[1]]+'-'+imp[0])
 
     return dates_list
 
-def get_contents():
+def get_flash():
     from time import localtime, strftime
 
     items =get_items()
@@ -62,12 +62,14 @@ def get_contents():
     if dates == []:
         return contents
 
-    contents += u'===========한 달 이내============\n'
+        contents += u'===========한 달 이내============\n'
     for i in range(0, 3):
         if in_Week_time <= dates[i]:
             contents += dates[i] + '\n' + titles[i] + '\n' + urls[i] + '\n\n'
-    contents += u'================================\n'
+        contents += u'================================\n'
     for i in range(0, 3):
         if in_Week_time > dates[i]:
             contents += dates[i] + '\n' + titles[i] + '\n' + urls[i] + '\n\n'
+
+        
     return contents

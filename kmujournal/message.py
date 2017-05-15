@@ -3,8 +3,8 @@
 def return_keyboard():
     home_buttons = [
         u"최신 기사",
-        u"최신 속보",
-        u"제보 하기",
+        u"단신 & 속보",
+        u"제보 방법",
     ]
 
     _base_keyboard = {
@@ -17,7 +17,7 @@ def return_message():
 
     _base_message = {
         "message": {
-            "text": "TEXT_MESSAGE",
+            "text": "어서오세요",
         },
         "keyboard": return_keyboard(),
     }
