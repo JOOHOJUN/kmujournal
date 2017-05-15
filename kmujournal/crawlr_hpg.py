@@ -51,12 +51,13 @@ def get_contents():
     urls = get_url(items)
     dates = get_dates(items)
     contents =''
-    YM_time=strftime("%Y.%m", localtime())
-    Day_time = 31-int(strftime("%d", localtime()))
-    if Day_time < 10:
-        Day_time='0'+str(Day_time)
+    Y_time=strftime("%Y.", localtime())
+    M_time=int(strftime("%m", localtime())) -1
+    if M_time == 0:
+        M_time = 12
+    Day_time = strftime("%d", localtime())
 
-    in_Week_time = YM_time +'.'+ Day_time
+    in_Week_time = Y_time +'.'+str(M_time)+'.'+ Day_time
 
     if dates == []:
         return contents
