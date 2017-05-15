@@ -39,7 +39,7 @@ def get_dates(get_items):
     for i in get_items:
         if r.search(i.find('category').text) != None:
             imp = i.find('pubdate').text.split(' ')[1:4]
-            dates_list.append(imp[2]+'-'+stands[imp[1]]+'-'+imp[0])
+            dates_list.append(imp[2]+'_'+stands[imp[1]]+'_'+imp[0])
 
     return dates_list
 
@@ -57,7 +57,7 @@ def get_flash():
         M_time = 12
     Day_time = strftime("%d", localtime())
 
-    in_Week_time = Y_time +'-'+str(M_time)+'-'+ Day_time
+    in_Week_time = Y_time +'_'+str(M_time)+'_'+ Day_time
 
     if dates == []:
         return contents
