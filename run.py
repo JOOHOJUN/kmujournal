@@ -3,6 +3,11 @@ from kmujournal import app
 from flask import request, jsonify
 from kmujournal import manager
 
+@app.route("/")
+def yellow_keyboard2():
+    message, code = manager.save_userkey(request)
+    return jsonify(message), code
+
 @app.route("/keyboard", methods=["GET"])
 def yellow_keyboard():
     message, code = manager.first_process()
@@ -34,4 +39,4 @@ def yellow_exit(key):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

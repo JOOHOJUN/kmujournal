@@ -3,11 +3,21 @@
 from kmujournal.message import return_message, return_keyboard,update_message, remove_keyboard
 from kmujournal.crawlr_hpg import get_contents
 from kmujournal.crawlr_fac import get_flash
-import re
+from kmujournal.datastore import create_entity_using_keyword_arguments, save_entity, get_entity
 
 def first_process():
     code = 200
-    return return_keyboard(), 200
+    kyb =return_keyboard()
+    return kyb, code
+
+def save_userkey(data):
+    User =create_entity_using_keyword_arguments(data.json["user_key"])
+    save_entity(User)
+    user1=get_entity(data.json["user_key"])
+
+    msg = return_message()
+    msg =update_message(msg, user1.user_key)
+    return msg, 200
 
 def af_clk_procees(data):
     code = 200
@@ -15,6 +25,10 @@ def af_clk_procees(data):
     user_key = data.json["user_key"]
     #request_type = data.json["type"]
     content = data.json["content"]
+
+    msg = return_message()
+    user1 = get_entity(data.json["user_key"])
+    return update_message(msg, user1.user_key), code
 
     if content == u'최신 기사':
         msg = return_message()
@@ -33,10 +47,10 @@ def af_clk_procees(data):
                                      u"제보받고 있습니다.\n"
                                      u"ex)성차별적, 성소수자 혐오발언 등")
         '''메시지에 그림 있다면'''
-        return udt_msg, 200
+        return udt_msg, code
     else:
         msg = return_message()
-        return msg, 200
+        return msg, code
 
 def add_friend(data):
     return 200
