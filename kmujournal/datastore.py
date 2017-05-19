@@ -17,5 +17,6 @@ def save_entity(User):
     User.put()
 
 def get_entity(user_key):
-    User = user_key.get()
+    User_key = ndb.Key(Account, user_key)
+    User = User_key.get()
     return User

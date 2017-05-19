@@ -3,7 +3,7 @@ from kmujournal import app
 from flask import request, jsonify
 from kmujournal import manager
 
-@app.route("/")
+@app.route("/", methods=["POST"])
 def yellow_keyboard2():
     message, code = manager.save_userkey(request)
     return jsonify(message), code

@@ -26,8 +26,11 @@ def af_clk_procees(data):
     #request_type = data.json["type"]
     content = data.json["content"]
 
+    User = create_entity_using_keyword_arguments(data.json["user_key"])
+    save_entity(User)
+    user1 = get_entity(user_key)
+
     msg = return_message()
-    user1 = get_entity(data.json["user_key"])
     return update_message(msg, user1.user_key), code
 
     if content == u'최신 기사':
