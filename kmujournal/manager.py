@@ -3,21 +3,13 @@
 from kmujournal.message import return_message, return_keyboard,update_message, remove_keyboard
 from kmujournal.crawlr_hpg import get_contents
 from kmujournal.crawlr_fac import get_flash
-from kmujournal.datastore import create_entity_using_keyword_arguments, save_entity, get_entity
+from kmujournal.datastore import create_entity_using_keyword_arguments, save_entity, get_entity, delete_entity
+import datetime
 
 def first_process():
     code = 200
     kyb =return_keyboard()
     return kyb, code
-
-def save_userkey(data):
-    User =create_entity_using_keyword_arguments(data.json["user_key"])
-    save_entity(User)
-    user1=get_entity(data.json["user_key"])
-
-    msg = return_message()
-    msg =update_message(msg, user1.user_key)
-    return msg, 200
 
 def af_clk_procees(data):
     code = 200
@@ -26,12 +18,12 @@ def af_clk_procees(data):
     #request_type = data.json["type"]
     content = data.json["content"]
 
-    User = create_entity_using_keyword_arguments(data.json["user_key"])
-    save_entity(User)
-    user1 = get_entity(user_key)
-
-    msg = return_message()
-    return update_message(msg, user1.user_key), code
+    if get_entity(user_key) == None:
+        user=create_entity_using_keyword_arguments(user_key)
+        save_entity(user)
+    user=get_entity(user_key)
+    user.search_keyword_record = str(user.search_keyword_record)+str(content) +'&'+str(datetime.datetime.now())+'\n'
+    save_entity(user)
 
     if content == u'최신 기사':
         msg = return_message()
@@ -43,20 +35,39 @@ def af_clk_procees(data):
 
     elif content == u'제보 방법':
         msg = return_message()
-        udt_msg =update_message(msg, u"키보드 1시 방향의 [1:1]를 누르세요\n"
+        report =get_entity("admin_User")
+        udt_msg =update_message(msg, report.search_keyword+
+                                    u"\n============================\n"
+                                    u"키보드 1시 방향의 [1:1]를 누르세요\n"
                                      u"on/off로 대화가 가능합니다.\n"
-                                     u"============================\n"
-                                     u"교강사의 부적절한 발언을\n"
-                                     u"제보받고 있습니다.\n"
-                                     u"ex)성차별적, 성소수자 혐오발언 등")
-        '''메시지에 그림 있다면'''
+                                )
         return udt_msg, code
     else:
         msg = return_message()
         return msg, code
 
+def update_report(data):
+    report =get_entity("admin_User")
+    content = data.json["content"]
+
+    report.search_keyword= content
+    save_entity(report)
+    msg = return_message()
+    msg = update_message(msg,content)
+    return msg, 200
+
 def add_friend(data):
+    User = create_entity_using_keyword_arguments(data.json["user_key"])
+    save_entity(User)
     return 200
 
 def delete_friend(user_key):
+    User=get_entity(user_key)
+    delete_entity(User)
+    return 200
+
+def exit_friend(user_key):
+    User=get_entity(user_key)
+    User.switch = False
+    save_entity(User)
     return 200

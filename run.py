@@ -3,9 +3,9 @@ from kmujournal import app
 from flask import request, jsonify
 from kmujournal import manager
 
-@app.route("/", methods=["POST"])
-def yellow_keyboard2():
-    message, code = manager.save_userkey(request)
+@app.route("/admin_for_report", methods=["POST"])
+def yellow_report():
+    message, code = manager.update_report(request)
     return jsonify(message), code
 
 @app.route("/keyboard", methods=["GET"])
@@ -18,7 +18,6 @@ def yellow_message():
     # msg = request.json['content']
     message, code = manager.af_clk_procees(request)
     return jsonify(message), code
-
 
 @app.route("/friend", methods=["POST"])
 def yellow_friend_add():
@@ -34,9 +33,9 @@ def yellow_friend_block(key):
 
 @app.route("/chat_room/<key>", methods=["DELETE"])
 def yellow_exit(key):
-    code = manager.delete_friend(key)
+    code = manager.exit_friend(key)
     return jsonify(code)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

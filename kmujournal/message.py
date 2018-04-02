@@ -17,7 +17,7 @@ def return_message():
 
     _base_message = {
         "message": {
-            "text": "어서오세요",
+            "text": "",
         },
         "keyboard": return_keyboard(),
     }

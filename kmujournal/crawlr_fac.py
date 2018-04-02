@@ -63,8 +63,11 @@ def get_flash():
         return contents
 
     chk = 0
+    len_items = len(dates)
     contents += u'==========한 달 이내===========\n'
-    for i in range(0, 5):
+    if len_items > 5:
+        len_items = 5
+    for i in range(0, len_items):
         if in_Week_time <= dates[i]:
             contents += dates[i] + '\n' + titles[i] + '\n' + urls[i] + '\n\n'
             chk = 1
@@ -72,7 +75,7 @@ def get_flash():
             if chk == 0:
                 contents += u'기사 없음\n'
             contents += u'=============================\n'
-            for j in range(i, 5):
+            for j in range(i, len_items):
                 contents += dates[j] + '\n' + titles[j] + '\n' + urls[j] + '\n\n'
                 continue
             break

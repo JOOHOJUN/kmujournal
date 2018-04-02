@@ -6,6 +6,3 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 import datastore
-
-datastore.Account()
-
